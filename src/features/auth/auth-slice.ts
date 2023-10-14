@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { authApi } from '@/features/auth/auth-api.ts'
+import { authApi, RegisterParamsType } from '@/features/auth/auth-api.ts'
 import { createAppAsyncThunk } from '@/shared/utils/create-app-async-thunk.ts'
 
 const initialState = {
@@ -39,6 +39,23 @@ const login = createAppAsyncThunk<{ isLoggedIn: boolean }, LoginParamsType>(
   }
 )
 
+const register = createAppAsyncThunk<void, RegisterParamsType>(
+  'auth/register',
+  async (arg, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI
+
+    try {
+      const res = await authApi.register(arg)
+
+      if (res.data) {
+        console.log(res.data)
+      }
+    } catch (err) {
+      return rejectWithValue(null)
+    }
+  }
+)
+
 type LoginParamsType = {
   userName: string
   password: string
@@ -47,4 +64,4 @@ type LoginParamsType = {
 export const authReducer = slice.reducer
 export const authActions = slice.actions
 
-export const authThunks = { login }
+export const authThunks = { login, register }

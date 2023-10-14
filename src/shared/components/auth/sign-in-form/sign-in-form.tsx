@@ -9,7 +9,6 @@ import github from '@/shared/images/github-142-svgrepo-com.svg'
 import logo from '@/shared/images/photo_2023-10-10_21-50-27-transformed-transformed.png'
 import { Button } from '@/shared/ui/button/button.tsx'
 import { Card } from '@/shared/ui/card/card.tsx'
-// import { ControlledCheckbox } from '@/shared/ui/controlled/controlled-checkbox/controlled-checkbox.tsx'
 import { ControlledCheckbox } from '@/shared/ui/controlled/controlled-checkbox/controlled-checkbox.tsx'
 import { ControlledTextField } from '@/shared/ui/controlled/controlled-text-field/controlled-text-field.tsx'
 import { Typography } from '@/shared/ui/typography/typography.tsx'
@@ -48,8 +47,8 @@ export const SignInForm = (props: Props) => {
       </div>
       <Typography variant="subtitle1">________________ OR ________________</Typography>
       <form className={s.form} onSubmit={onSubmitHandler}>
-        <ControlledTextField label="login" name={'userName'} control={control} />
-        <ControlledTextField label="password" type="password" name="password" control={control} />
+        <ControlledTextField label="Логин" name={'userName'} control={control} />
+        <ControlledTextField label="Пароль" type="password" name="password" control={control} />
         <ControlledCheckbox label="Запомнить?" control={control} name="rememberMe" />
         <Typography className={s.forgotLink} variant="body2" as={Link} to="/recover">
           Забыли пароль?
@@ -57,6 +56,12 @@ export const SignInForm = (props: Props) => {
         <Button className={s.loginButton} variant="primary" fullWidth type="submit">
           Войти
         </Button>
+        <Typography variant="body2" className={s.signupLink}>
+          Нет аккаунта?
+          <Typography as={Link} to="/sign-up" variant="link2">
+            Зарегистрируйтесь
+          </Typography>
+        </Typography>
       </form>
     </Card>
   )
